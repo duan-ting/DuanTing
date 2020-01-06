@@ -1,0 +1,37 @@
+DROP DATABASE IF EXISTS ktv;
+CREATE DATABASE IF NOT EXISTS ktv;
+
+SELECT song_name,song_play_count 
+FROM song_info,singer_info
+WHERE song_info.singer_id=singer_info.singer_id
+AND singer_name='»ðÄñ´«Ææ' AND song_play_count>10
+
+SELECT ss.song_name,ss.song_play_count,tt1.singertype_name,tt2.songtype_name
+FROM song_info AS ss,singer_type AS tt1,song_type AS tt2
+WHERE  ss.singer_id=tt1.singertype_id AND ss.songtype_id=tt2.songtype_id
+ORDER BY ss.song_play_count DESC
+
+INSERT INTO ITBoySong
+SELECT a.song_name ,a.song_play_count ,d.singer_name 
+FROM song_info a
+INNER JOIN singer_info d ON(a.singer_id=d.singer_id)
+WHERE a.song_name='TFboys'
+ORDER BY a.song_play_count DESC
+LIMIT 2,4
+
+DELETE  FROM singer_info WHERE singer_id NOT IN
+(SELECT singer_id  FROM song_info WHERE song_play_count<=5)
+
+SELECT songtype_name,COUNT(song_id) AS 'ÊýÁ¿'
+FROM song_type,song_info
+WHERE song_info.songtype_id=song_type.songtype_id
+GROUP BY song_info.songtype_id
+
+START TRANSACTION 
+DELETE FROM song_info WHERE song_play_count=0
+COMMIT 
+ROLLBACK
+
+ÎûÎûÎûÎûÎû
+¹þ¹þ¹þ¹þ¹þ
+Ç¾Þ±ÇøÎÞÈºÎÞÈº
